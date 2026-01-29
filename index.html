@@ -1,0 +1,1064 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RUST-X - Anti-Corrosion Solutions from Repurposed Medicines</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Orbitron", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background: #0a1628;
+        color: #ffffff;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 1.5rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(10, 22, 40, 0.1); /* Changed from 0.95 to 0.1 */
+        backdrop-filter: blur(20px); /* Increased from 10px to 20px */
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo-container img {
+        height: 50px;
+        width: auto;
+      }
+
+      .brand-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #2dd4bf, #0891b2);
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .nav-links a:hover {
+        color: #2dd4bf;
+      }
+
+      .nav-cta {
+        padding: 0.75rem 2rem;
+        background: linear-gradient(135deg, #2dd4bf, #0891b2);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .nav-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(45, 212, 191, 0.4);
+      }
+
+      /* Mobile menu toggle */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: #2dd4bf;
+        transition: all 0.3s ease;
+      }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 22, 40, 0.3);
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        color: white;
+        padding: 0 5%;
+        max-width: 1200px;
+      }
+
+      .hero-title {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 900;
+        letter-spacing: 0.15em;
+        margin-bottom: 1rem;
+        text-shadow:
+          0 0 30px rgba(45, 212, 191, 0.6),
+          0 0 60px rgba(45, 212, 191, 0.4),
+          0 5px 20px rgba(0, 0, 0, 0.8);
+
+        animation: glow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          filter: drop-shadow(0 0 10px rgba(45, 212, 191, 0.5));
+        }
+        to {
+          filter: drop-shadow(0 0 25px rgba(45, 212, 191, 0.9));
+        }
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 3vw, 2rem);
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+        color: #2dd4bf;
+      }
+
+      .hero-description {
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        font-weight: 300;
+        max-width: 700px;
+        margin: 0 auto 3rem;
+        line-height: 1.8;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        opacity: 0.95;
+      }
+
+      .hero-cta {
+        display: inline-block;
+        padding: 1.2rem 3rem;
+        background: linear-gradient(135deg, #2dd4bf, #0891b2);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 5px 25px rgba(45, 212, 191, 0.4);
+      }
+
+      .hero-cta:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 35px rgba(45, 212, 191, 0.6);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        animation: bounce 2s infinite;
+        z-index: 10;
+        cursor: pointer;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(10px);
+        }
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 6rem 5%;
+        background: url("/assests/5297078.jpg") center/cover;
+        position: relative;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        margin-bottom: 1rem;
+        color: white;
+        font-weight: 700;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        max-width: 800px;
+        margin: 0 auto 4rem;
+        line-height: 1.8;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .about-card {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 2.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #2dd4bf, #0891b2);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .about-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .about-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(45, 212, 191, 0.5);
+        box-shadow: 0 15px 40px rgba(45, 212, 191, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .card-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+        color: #2dd4bf;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .card-stat {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #0891b2;
+        margin-bottom: 0.5rem;
+      }
+
+      .card-description {
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+      }
+
+      /* Stats Section */
+      .stats-section {
+        padding: 5rem 5%;
+        background: url("/assests/23964.jpg");
+        text-align: center;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 3rem auto 0;
+      }
+
+      .stat-card {
+        padding: 2rem;
+        background: rgba(45, 212, 191, 0.05);
+        border-radius: 15px;
+        border: 2px solid rgba(45, 212, 191, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: scale(1.05);
+        border-color: rgba(45, 212, 191, 0.5);
+        box-shadow: 0 10px 30px rgba(45, 212, 191, 0.3);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #2dd4bf;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* Features Section */
+      .features-section {
+        padding: 6rem 5%;
+        background: url("/assests/v796-nunny-03b.jpg");
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        max-width: 1400px;
+        margin: 4rem auto 0;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 2.5rem;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(45, 212, 191, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(45, 212, 191, 0.5);
+        box-shadow: 0 15px 40px rgba(45, 212, 191, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(
+          135deg,
+          rgba(45, 212, 191, 0.2),
+          rgba(8, 145, 178, 0.2)
+        );
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-title {
+        font-size: 1.5rem;
+        color: #2dd4bf;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .feature-description {
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* Testimonials Section */
+      .testimonials-section {
+        padding: 6rem 5%;
+        background: linear-gradient(135deg, #132a47 0%, #0a1628 100%);
+      }
+
+      .testimonials-container {
+        max-width: 1400px;
+        margin: 4rem auto 0;
+        position: relative;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .testimonial-card {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 2.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(45, 212, 191, 0.2);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(45, 212, 191, 0.4);
+        box-shadow: 0 10px 30px rgba(45, 212, 191, 0.2);
+      }
+
+      .stars {
+        color: #fbbf24;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .testimonial-text {
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 2rem;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2dd4bf, #0891b2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .author-info h4 {
+        color: #2dd4bf;
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .author-info p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+      }
+
+      /* Projects Section */
+      .projects-section {
+        padding: 6rem 5%;
+        background: #0a1628;
+      }
+
+      .projects-nav {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      .project-nav-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid rgba(45, 212, 191, 0.3);
+        background: rgba(255, 255, 255, 0.03);
+        color: #2dd4bf;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .project-nav-btn:hover {
+        background: rgba(45, 212, 191, 0.2);
+        border-color: rgba(45, 212, 191, 0.6);
+        transform: scale(1.1);
+      }
+
+      /* Footer */
+      footer {
+        background: #05111f;
+        padding: 3rem 5%;
+        text-align: center;
+        border-top: 1px solid rgba(45, 212, 191, 0.2);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-logo {
+        height: 60px;
+        margin-bottom: 1rem;
+      }
+
+      .footer-text {
+        color: rgba(255, 255, 255, 0.6);
+        margin: 1rem 0;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #2dd4bf;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid rgba(45, 212, 191, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2dd4bf;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: rgba(45, 212, 191, 0.2);
+        border-color: #2dd4bf;
+        transform: translateY(-3px);
+      }
+      .unified-bg-wrapper {
+        /* Replace with your image path */
+        background: url("/assests/v796-nunny-03b.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* Keeps the image still while you scroll */
+        width: 100%;
+      }
+
+      /* Make individual sections transparent to see the wrapper background */
+      .features-section,
+      .testimonials-section,
+      .projects-section {
+        background: transparent !important;
+      }
+
+      /* Ensure text remains sharp against the background image */
+      .section-title {
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      }
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(10, 22, 40, 0.98);
+          flex-direction: column;
+          padding: 2rem;
+          gap: 1.5rem;
+          border-top: 1px solid rgba(45, 212, 191, 0.2);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .about-grid,
+        .features-grid,
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo-container">
+        <img src="/assests/rust-logo.png" alt="RUST-X Logo" />
+        <span class="brand-name">RUST-X</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="/services.html" class="nav-cta">Buy Now</a></li>
+      </ul>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <img
+        src="/assests/rust-hero-bg.png"
+        alt="RUST-X Infrastructure Transformation"
+        class="hero-background"
+      />
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">RUST-X</h1>
+        <p class="hero-subtitle">
+          Anti-Corrosion Solutions from Repurposed Medicines
+        </p>
+        <p class="hero-description">
+          Transforming aging infrastructure through innovative pharmaceutical
+          repurposing. Revolutionary corrosion prevention technology that
+          protects, preserves, and extends the life of critical infrastructure.
+        </p>
+        <a href="#about" class="hero-cta">Explore Now</a>
+      </div>
+
+      <div
+        class="scroll-indicator"
+        onclick="
+          document
+            .getElementById('about')
+            .scrollIntoView({ behavior: 'smooth' })
+        "
+      >
+        <span>Scroll</span>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <h2 class="section-title">About RUST-X</h2>
+      <p class="section-subtitle">
+        <strong>RUST-X </strong> is a revolutionary startup tackling the<strong
+          >$6.26 trillion</strong
+        >
+        global corrosion crisis by repurposing expired pharmaceutical waste. We
+        transform discarded medicines like Paracetamol and Aspirin into
+        high-performance, eco-friendly inhibitors that are
+        <strong>40-50% cheaper</strong> and up to
+        <strong>95% more efficient</strong> than hazardous traditional
+        chemicals. We provide a greener, smarter shield for the world’s most
+        critical maritime and energy infrastructure
+      </p>
+
+      <div class="about-grid">
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="card-icon">🧪</div>
+            <h3 class="card-title">Sustainable Innovation</h3>
+            <p class="card-description">
+              Repurposing expired pharmaceutical waste to fight the
+              <strong>$6.26 trillion</strong> global corrosion crisis with
+              eco-friendly technology.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">95% Efficiency</h3>
+            <p class="card-description">
+              Utilizing active heterocyclic compounds from common drugs to
+              provide superior protection for
+              <strong>Maritime and Oil & Gas</strong> infrastructure.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="card-icon">💰</div>
+            <h3 class="card-title">40-50% Cheaper</h3>
+            <p class="card-description">
+              By using pharmaceutical waste as raw material, we offer a
+              high-performance shield at <strong>half the cost</strong> of
+              hazardous traditional inhibitors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <h2 class="section-title">Our Impact in Numbers</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Corrosion Reduction</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">X+</div>
+          <div class="stat-label">Countries Served</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">X+ Yrs</div>
+          <div class="stat-label">Extended Lifespan</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Eco-Friendly</div>
+        </div>
+      </div>
+    </section>
+    <div class="unified-bg-wrapper">
+      <!-- Features/Services Section -->
+      <section id="services" class="features-section">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">
+          Comprehensive anti-corrosion solutions tailored to protect and extend
+          the life of your infrastructure.
+        </p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🔬</div>
+            <h3 class="feature-title">Pharmaceutical Repurposing</h3>
+            <p class="feature-description">
+              Innovative use of repurposed pharmaceutical compounds to create
+              powerful anti-corrosion treatments that are both effective and
+              environmentally sustainable.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3 class="feature-title">Protective Coating Systems</h3>
+            <p class="feature-description">
+              Advanced multi-layer coating technology that provides long-lasting
+              protection against rust, corrosion, and environmental degradation.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">♻️</div>
+            <h3 class="feature-title">Sustainable Solutions</h3>
+            <p class="feature-description">
+              Eco-friendly formulations derived from repurposed medicines reduce
+              environmental impact while delivering superior corrosion
+              protection.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Custom Applications</h3>
+            <p class="feature-description">
+              Tailored treatment plans for bridges, pipelines, marine
+              structures, industrial facilities, and more, ensuring optimal
+              protection for every scenario.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials-section">
+        <h2 class="section-title">What Our Clients Say About Us</h2>
+        <p class="section-subtitle">
+          Hear from infrastructure managers and engineers who have transformed
+          their assets with RUST-X.
+        </p>
+
+        <div class="testimonials-container">
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="stars">★★★★☆</div>
+              <p class="testimonial-text">
+                "RUST-X completely transformed our aging bridge infrastructure.
+                The pharmaceutical-based coating not only stopped the corrosion
+                but actually reversed some of the damage. It's remarkable
+                technology that's both innovative and practical."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">KW</div>
+                <div class="author-info">
+                  <h4>Kristan Watson</h4>
+                  <p>Infrastructure Manager</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★☆</div>
+              <p class="testimonial-text">
+                "As someone who values sustainable solutions, RUST-X impressed
+                me with their eco-friendly approach. The fact that they
+                repurpose medicines into anti-corrosion treatments is genius.
+                Our pipeline network has never been better protected."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">VN</div>
+                <div class="author-info">
+                  <h4>Vinicious Nerva</h4>
+                  <p>Environmental Engineer</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">★★★★☆</div>
+              <p class="testimonial-text">
+                "The ROI on RUST-X treatment has been exceptional. We've
+                extended the life of our industrial facilities by decades, and
+                the real-time monitoring system gives us peace of mind. This is
+                the future of infrastructure maintenance."
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">JV</div>
+                <div class="author-info">
+                  <h4>John Verma</h4>
+                  <p>Operations Director</p>
+                </div>
+              </div>
+            </div>
+            <div class="about-card">
+              <div class="card-icon">📦</div>
+              <h3 class="card-title">Packages Download</h3>
+              <div class="card-stat">XXXX+</div>
+              <p class="card-description">
+                Over half a million successful applications worldwide,
+                protecting critical infrastructure from bridges to pipelines
+                with our innovative anti-corrosion solutions.
+              </p>
+            </div>
+
+            <div class="about-card">
+              <div class="card-icon">😊</div>
+              <h3 class="card-title">Happy Clients</h3>
+              <div class="card-stat">XXXX+</div>
+              <p class="card-description">
+                Trusted by governments, municipalities, and private enterprises
+                globally. Our proven track record speaks for itself in
+                infrastructure preservation and enhancement.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="projects-section">
+        <h2 class="section-title">Our Projects</h2>
+        <p class="section-subtitle">
+          Showcasing successful infrastructure transformations across bridges,
+          pipelines, marine structures, and industrial facilities worldwide.
+        </p>
+
+        <div class="projects-nav">
+          <button class="project-nav-btn">‹</button>
+          <button class="project-nav-btn">›</button>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🌉</div>
+            <h3 class="feature-title">Metropolitan Bridge Restoration</h3>
+            <p class="feature-description">
+              Complete corrosion treatment of a 100-year-old steel bridge,
+              extending its operational life by 30 years using RUST-X
+              pharmaceutical-based coating technology.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🏭</div>
+            <h3 class="feature-title">Industrial Complex Protection</h3>
+            <p class="feature-description">
+              Comprehensive anti-corrosion system for chemical processing
+              facilities, ensuring safety and compliance while reducing
+              maintenance costs by 60%.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚓</div>
+            <h3 class="feature-title">Marine Infrastructure Defense</h3>
+            <p class="feature-description">
+              Specialized treatment for offshore platforms and port facilities,
+              providing superior protection against harsh saltwater
+              environments.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <img
+          src="/assests/rust-logo.png"
+          alt="RUST-X Logo"
+          class="footer-logo"
+        />
+        <p class="footer-text">
+          RUST-X - Pioneering anti-corrosion solutions through pharmaceutical
+          innovation.<br />
+          Protecting infrastructure, preserving the future.
+        </p>
+
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a href="#privacy">Privacy Policy</a>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">𝕏</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">📷</a>
+        </div>
+
+        <p class="footer-text" style="margin-top: 2rem; font-size: 0.9rem">
+          © 2026 RUST-X. All rights reserved. | Anti-Corrosion Solutions from
+          Repurposed Medicines
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      function toggleMenu() {
+        const navLinks = document.getElementById("navLinks");
+        navLinks.classList.toggle("active");
+      }
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+            // Close mobile menu if open
+            document.getElementById("navLinks").classList.remove("active");
+          }
+        });
+      });
+
+      // Navbar background on scroll
+      window.addEventListener("scroll", function () {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 100) {
+          nav.style.background =
+            "rgba(10, 22, 40, 0.3)"; /* Changed from 0.98 */
+          nav.style.backdropFilter = "blur(20px)";
+        } else {
+          nav.style.background =
+            "rgba(10, 22, 40, 0.1)"; /* Changed from 0.95 */
+          nav.style.backdropFilter = "blur(20px)";
+        }
+      });
+    </script>
+  </body>
+</html>
